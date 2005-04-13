@@ -1,0 +1,27 @@
+body { font-family: Verdana, Arial, Helvetica, Tahoma; font-size: small; background-color: #EFEFEF;}
+a { color: #000066; text-decoration: none; font-style: italic; }
+div { display: none; }
+
+/* FIXME -- make the spacing of the little cells prettier. This is a start:
+table.m td { padding: 0; margin: 2px; }
+table.m { margin: 0; margin-bottom: 2px; border-spacing: 2px 0; empty-cells: hide }
+*/
+
+.x { overflow: hidden; white-space: nowrap; width: 12em; height: 1em; }
+.x a { display: block; text-decoration: none;}
+.x a div { display: none; font-weight: bold; color: #336699; font-style: none;}
+.x a:visited div { display: none }
+
+.x a:hover div { display: block; position: absolute; background-color: #BBBBBB; border: 1px solid #444444; left: 2em; padding: 5px; }
+
+.r, .x { color: black; border: 1px solid #505050; }
+.sum { width: 1em;  text-align: right; }
+.sum, .r, .ok { font-weight: bold; font-size: 85%; padding-left: 0.3em; padding-right: 0.3em; }
+.ok { text-align: center; }
+
+.f { background-color: #ff3020; }
+.p { background-color: #00ff00; }
+.sk { background-color: #ddffdd; }
+.u { background-color: #ffdd20; color: white; }
+.t { background-color: #007f00; color: white; }
+.nottest { background-color: #7f7f7f; color: white ; }
