@@ -123,4 +123,51 @@ A sorted array ref, resulting from $self->model->test_files;
 
 =back
 
+=head1 AUTHORS
+
+This list was generated from svn log testgraph.pl and testgraph.css in the pugs
+repo, sorted by last name.
+
+=over 4
+
+=item *
+
+Michal Jurosz
+
+=item *
+
+Yuval Kogman <nothingmuch@woobling.org> NUFFIN
+
+=item *
+
+Max Maischein <corion@cpan.org> CORION
+
+=item *
+
+James Mastros <james@mastros.biz> JMASTROS
+
+=item *
+
+Scott McWhirter <scott-cpan@NOSPAMkungfuftr.com> KUNGFUFTR
+
+=item *
+
+putter (svn handle)
+
+=item *
+
+Autrijs Tang <autrijus@autrjius.org> AUTRIJUS
+
+=item *
+
+Gaal Yahas <gaal@forum2.org> GAAL
+
+=back
+
+=head1 COPYRIGHT & LICNESE
+
+	Copyright (c) 2005 the aforementioned authors. All rights
+	reserved. This program is free software; you can redistribute
+	it and/or modify it under the same terms as Perl itself.
+
 =cut
