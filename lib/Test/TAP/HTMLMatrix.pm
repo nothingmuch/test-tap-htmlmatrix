@@ -23,7 +23,13 @@ sub new {
 	my __PACKAGE__ $self = $pkg->fields::new;
 
 	my $ext = shift;
-	my $petal = shift || new Petal file => $self->template_file, input => "XHTML", output => "XHTML";
+	my $petal = shift || Petal->new(
+		file => File::Spec->abs2rel($self->template_file), # damn petal requires rel path
+		input => "XHTML",
+		output => "XHTML",
+
+		decode_charset => "utf8",
+	);
 
 	$self->model($model);
 	$self->extra($ext);
