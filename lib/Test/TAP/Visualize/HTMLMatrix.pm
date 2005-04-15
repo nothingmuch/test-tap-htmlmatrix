@@ -29,7 +29,7 @@ sub new {
 	$self;
 }
 
-sub title { "TAP Matrix - " . gmtime() }
+sub title { "TAP Matrix - " . gmtime() . " GMT" }
 
 sub tests {
 	my $self = shift;
@@ -113,7 +113,9 @@ Just settergetters. You can override these for added fun.
 
 =item title
 
-A reasonable title for the page
+A reasonable title for the page:
+
+	"TAP Matrix - <gmtime>"
 
 =item tests
 
