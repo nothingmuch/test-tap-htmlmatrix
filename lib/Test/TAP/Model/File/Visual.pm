@@ -10,7 +10,7 @@ use Test::TAP::Model::Subtest::Visual;
 
 sub subtest_class { "Test::TAP::Model::Subtest::Visual" }
 
-sub str_status { $_[0]->ok ? "OK" : ($_[0]->bailed_out ? "FAILED" : "BAILED OUT") }
+sub str_status { $_[0]->ok ? "OK" : ($_[0]->bailed_out ? "BAILED OUT" : "FAILED") }
 
 sub link { $_[0]->name }
 
