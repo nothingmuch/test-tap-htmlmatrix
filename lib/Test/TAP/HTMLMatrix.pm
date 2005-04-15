@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-package Test::TAP::Visualize::HTMLMatrix;
+package Test::TAP::HTMLMatrix;
 use fields qw/model extra petal/;
 
 use strict;
@@ -69,17 +69,17 @@ __END__
 
 =head1 NAME
 
-Test::TAP::Visualize::HTMLMatrix - Creates colorful matrix of L<Test::Harness>
+Test::TAP::HTMLMatrix - Creates colorful matrix of L<Test::Harness>
 friendly test run results using L<Test::TAP::Model>.
 
 =head1 SYNOPSIS
 
-	use Test::TAP::Visualize::HTMLMatrix;
+	use Test::TAP::HTMLMatrix;
 	use Test::TAP::Model::Visual;
 
 	my $model = Test::TAP::Model::Visual->new(...);
 
-	my $v = Test::TAP::Visualize::HTMLMatrix->new($model);
+	my $v = Test::TAP::HTMLMatrix->new($model);
 
 	print $v->html;
 

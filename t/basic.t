@@ -7,7 +7,7 @@ use Test::More tests => 6;
 
 
 my $m;
-BEGIN { use_ok($m = "Test::TAP::Visualize::HTMLMatrix") }
+BEGIN { use_ok($m = "Test::TAP::HTMLMatrix") }
 
 use Test::TAP::Model::Visual;
 my $r = Test::TAP::Model::Visual->new;
