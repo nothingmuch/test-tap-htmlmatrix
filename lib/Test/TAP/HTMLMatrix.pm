@@ -70,6 +70,8 @@ sub _find_in_INC {
 		my $target = File::Spec->catfile($str, $file);
 		return $target if -e $target;
 	}
+
+	die "couldn't find $file in \@INC";
 }
 
 sub _find_in_my_INC {
