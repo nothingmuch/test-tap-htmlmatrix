@@ -10,6 +10,7 @@ use Test::TAP::Model;
 use Test::TAP::Model::Visual;
 use Petal;
 use Carp qw/croak/;
+use File::Spec;
 
 use overload '""' => "html";
 
@@ -19,10 +20,11 @@ sub new {
 	my $pkg = shift;
 
 	my $model = shift || croak "must supply a model to graph";
-	my $ext = shift;
-	my $petal = shift || new Petal file => "template.html", input => "XHTML", output => "XHTML";
 
 	my __PACKAGE__ $self = $pkg->fields::new;
+
+	my $ext = shift;
+	my $petal = shift || new Petal file => $self->template_file, input => "XHTML", output => "XHTML";
 
 	$self->model($model);
 	$self->extra($ext);
@@ -60,7 +62,32 @@ sub html {
 	my __PACKAGE__ $self = shift;
 	$self->{petal}->process(page => $self);
 }
-	
+
+sub _find_in_INC {
+	my $self = shift;
+	my $file = shift;
+
+	foreach my $str (grep { not ref } @INC){
+		my $target = File::Spec->catfile($str, $file);
+		return $target if -e $target;
+	}
+}
+
+sub _find_in_my_INC {
+	my $self = shift;
+	$self->_find_in_INC(File::Spec->catfile(split("::", __PACKAGE__), shift));
+}
+
+sub template_file {
+	my $self = shift;
+	$self->_find_in_my_INC("template.html");
+}
+
+sub css_file {
+	my $self = shift;
+	$self->_find_in_my_INC("htmlmatrix.css");
+}
+
 __PACKAGE__
 
 __END__
@@ -124,6 +151,17 @@ A reasonable title for the page:
 =item tests
 
 A sorted array ref, resulting from $self->model->test_files;
+
+=item template_file
+
+=item css_file
+
+These return the full path to the L<Petal> template and the CSS stylesheet it
+uses.
+
+Note that these are taken from @INC. If you put F<template.html> under
+C< catfile(qw/Test TAP HTMLMatrix/) > somewhere in your @INC, it should find it
+like you'd expect.
 
 =back
 
