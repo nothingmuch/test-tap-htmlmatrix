@@ -91,7 +91,9 @@ and produce a pretty html file.
 
 =head1 METHODS
 
-=over 4 new ($model, $?extra, $?petal)
+=over 4
+
+=item new ($model, $?extra, $?petal)
 
 $model is the L<Test::TAP::Model> object to extract results from, and the
 optional $?extra is a string to put in <pre></pre> at the top.
