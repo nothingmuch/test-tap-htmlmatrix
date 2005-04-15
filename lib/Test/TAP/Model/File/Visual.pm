@@ -71,6 +71,11 @@ The structure returned is:
 
 	[ { cases => [ case, case, ... ] }, { cases => [ ... ] }, ... ];
 
+=item subtest_class
+
+This method overrides L<Test::TAP::Model::File/subtest_class> to return
+L<Test::TAP::Model::Subtest::Visual>.
+
 =back
 
 =cut

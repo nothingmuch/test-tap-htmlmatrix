@@ -27,7 +27,18 @@ knows it's color.
 
 =head1 DESCRIPTION
 
-
 It inherits from L<Test::TAP::Model::Colorful>. That's about it.
+
+=head1 METHODS
+
+=over 4
+
+=item file_class
+
+This is actually the only functionality. This method is overridden to return
+L<Test::TAP::Model::File::Visual>. See L<Test::TAP::Model/file_class> for
+details.
+
+=back
 
 =cut
