@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 
-# FIXME make Model know how to be subclassed well
-
 package Test::TAP::Visualize::HTMLMatrix;
 use fields qw/model extra petal/;
 
