@@ -6,7 +6,6 @@ use fields qw/model extra petal/;
 use strict;
 use warnings;
 
-use Test::TAP::Model;
 use Test::TAP::Model::Visual;
 use Petal;
 use Carp qw/croak/;
