@@ -6,7 +6,7 @@ use warnings;
 use Test::More tests => 6;
 
 my $m;
-BEGIN { use_ok($m = "Test::TAP::Visualize::HTMLMatrix::Colorful") }
+BEGIN { use_ok($m = "Test::TAP::Model::Colorful") }
 
 my $ratio;
 {

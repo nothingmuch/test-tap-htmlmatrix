@@ -9,7 +9,7 @@ my $m;
 
 BEGIN { use_ok($m = "Test::TAP::Model::File::Visual") }
 
-isa_ok((bless {}, $m), "Test::TAP::Visualize::HTMLMatrix::Colorful");
+isa_ok((bless {}, $m), "Test::TAP::Model::Colorful");
 isa_ok((bless {}, $m), "Test::TAP::Model::File");
 
 can_ok($m, "subtest_class");

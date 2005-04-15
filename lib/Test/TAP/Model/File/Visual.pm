@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package Test::TAP::Model::File::Visual;
-use base qw/Test::TAP::Model::File Test::TAP::Visualize::HTMLMatrix::Colorful/;
+use base qw/Test::TAP::Model::File Test::TAP::Model::Colorful/;
 
 use strict;
 use warnings;
@@ -47,7 +47,7 @@ methods.
 This module is a subclass of L<Test::TAP::Model::File> that provides some
 methods that ease display.
 
-It also inherits from L<Test::TAP::Visualize::HTMLMatrix::Colorful>, which
+It also inherits from L<Test::TAP::Model::Colorful>, which
 provides additional methods.
 
 =head1 METHODS

@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package Test::TAP::Model::Visual;
-use base qw/Test::TAP::Model Test::TAP::Visualize::HTMLMatrix::Colorful/;
+use base qw/Test::TAP::Model Test::TAP::Model::Colorful/;
 
 use strict;
 use warnings;
@@ -28,6 +28,6 @@ knows it's color.
 =head1 DESCRIPTION
 
 
-It inherits from L<Test::TAP::Visualize::HTMLMatrix::Colorful>. That's about it.
+It inherits from L<Test::TAP::Model::Colorful>. That's about it.
 
 =cut

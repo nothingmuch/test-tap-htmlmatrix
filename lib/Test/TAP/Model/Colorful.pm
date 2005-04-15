@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-package Test::TAP::Visualize::HTMLMatrix::Colorful;
+package Test::TAP::Model::Colorful;
 
 use strict;
 use warnings;
@@ -31,7 +31,7 @@ __END__
 
 =head1 NAME
 
-Test::TAP::Visualize::HTMLMatrix::Colurful - Creates color from something that
+Test::TAP::Model::Colurful - Creates color from something that
 knows it's success ratio.
 
 =head1 SYNOPSIS
