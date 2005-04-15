@@ -13,6 +13,8 @@ use Carp qw/croak/;
 
 use overload '""' => "html";
 
+our $VERSION = "0.01";
+
 sub new {
 	my $pkg = shift;
 
