@@ -10,6 +10,7 @@ use Test::TAP::Model::Visual;
 use Petal;
 use Carp qw/croak/;
 use File::Spec;
+use URI::file;
 
 use overload '""' => "html";
 
@@ -95,6 +96,11 @@ sub css_file {
 	$self->_find_in_my_INC("htmlmatrix.css");
 }
 
+sub css_uri {
+	my $self = shift;
+	URI::file->new($self->css_file);
+}
+
 __PACKAGE__
 
 __END__
@@ -169,6 +175,12 @@ uses.
 Note that these are taken from @INC. If you put F<template.html> under
 C< catfile(qw/Test TAP HTMLMatrix/) > somewhere in your @INC, it should find it
 like you'd expect.
+
+=item css_uri
+
+This is a L<URI::file> object based on C<css_file>. Nothing fancy.
+
+You probably want to override this to something more specific to your env.
 
 =back
 
