@@ -13,7 +13,7 @@ sub css_class {
 	my $todo = $self->todo;
 	
 	"x " .
-	($self->ok
+	($self->actual_ok
 		? ( $todo ? "u" : "p" )
 		: ( $todo ? "t" : "f" ))
 }
