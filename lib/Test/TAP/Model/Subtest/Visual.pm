@@ -6,6 +6,9 @@ use base qw/Test::TAP::Model::Subtest/;
 use strict;
 use warnings;
 
+use URI;
+use URI::file;
+
 sub css_class {
 	my $self = shift;
 	return "x sk" if $self->skipped;
@@ -26,7 +29,12 @@ sub popup {
 sub link {
 	my $self = shift;
 	my $file = $self->test_file;
-	$file ?  sprintf("%s#line_%d", $file, $self->test_line) : "#";
+	return URI->new("#") unless $file;
+
+	my $uri = URI::file->new($file);
+	$_ and $uri->fragment("line_$_") for $self->test_line;
+	
+	return $uri;
 }
 
 __PACKAGE__

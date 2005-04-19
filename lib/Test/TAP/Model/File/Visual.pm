@@ -7,12 +7,13 @@ use strict;
 use warnings;
 
 use Test::TAP::Model::Subtest::Visual;
+use URI::file;
 
 sub subtest_class { "Test::TAP::Model::Subtest::Visual" }
 
 sub str_status { $_[0]->ok ? "OK" : ($_[0]->bailed_out ? "BAILED OUT" : "FAILED") }
 
-sub link { $_[0]->name }
+sub link { URI::file->new($_[0]->name) }
 
 sub case_rows {
 	my $self = shift;
