@@ -11,7 +11,18 @@ use URI::file;
 
 sub subtest_class { "Test::TAP::Model::Subtest::Visual" }
 
-sub str_status { $_[0]->ok ? "OK" : ($_[0]->bailed_out ? "BAILED OUT" : "FAILED") }
+sub str_status {
+	my $self = shift;
+	return "SKIPPED" if $self->skipped;
+	return "BAILED OUT" if $self->bailed_out;
+
+	return "OK"
+		if $self->ok
+		and $self->actual_cases == $self->planned
+		and $self->actual_cases > 0;
+
+	return "FAILED";
+}
 
 sub link { URI::file->new($_[0]->name) }
 
