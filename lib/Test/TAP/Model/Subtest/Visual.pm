@@ -45,7 +45,7 @@ __END__
 
 =head1 NAME
 
-Test::Tap::Model::Subtest::Visual - A subtest with additional display oriented
+Test::TAP::Model::Subtest::Visual - A subtest with additional display oriented
 methods.
 
 =head1 SYNOPSIS

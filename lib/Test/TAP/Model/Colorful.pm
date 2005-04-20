@@ -31,7 +31,7 @@ __END__
 
 =head1 NAME
 
-Test::TAP::Model::Colurful - Creates color from something that
+Test::TAP::Model::Colorful - Creates color from something that
 knows it's success ratio.
 
 =head1 SYNOPSIS

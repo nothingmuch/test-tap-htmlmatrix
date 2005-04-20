@@ -47,7 +47,7 @@ __END__
 
 =head1 NAME
 
-Test::Tap::Model::File::Visual - A test file with additional display oriented
+Test::TAP::Model::File::Visual - A test file with additional display oriented
 methods.
 
 =head1 SYNOPSIS
