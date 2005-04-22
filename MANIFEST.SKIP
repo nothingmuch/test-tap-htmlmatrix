@@ -9,3 +9,5 @@
 ^MANIFEST\.SKIP$
 \.tar\.gz$
 ^_darcs
+^Makefile$
+\.old$
