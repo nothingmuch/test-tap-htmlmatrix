@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package Test::TAP::HTMLMatrix;
-use fields qw/model extra petal/;
+use fields qw/model extra petal has_inline_css/;
 
 use strict;
 use warnings;
@@ -14,7 +14,7 @@ use URI::file;
 
 use overload '""' => "html";
 
-our $VERSION = "0.03";
+our $VERSION = "0.04";
 
 sub new {
 	my $pkg = shift;
@@ -99,6 +99,24 @@ sub css_file {
 sub css_uri {
 	my $self = shift;
 	URI::file->new($self->css_file);
+}
+
+sub has_inline_css {
+	my $self = shift;
+	$self->{has_inline_css} = shift if @_;
+	$self->{has_inline_css};
+}
+
+sub css_html {                # inline html version of css
+	my $self = shift;
+	local $/;
+	open my $fh, $self->css_file or die "open: " . $self->css_file. ": $!";
+	<$fh>;
+}
+
+sub inline_css {
+	my $self = shift;
+	"\t<--\n" . $self->css_html . "\t-->\n\t";
 }
 
 __PACKAGE__
