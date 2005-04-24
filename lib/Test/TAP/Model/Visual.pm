@@ -10,6 +10,15 @@ use Test::TAP::Model::File::Visual;
 
 sub file_class { "Test::TAP::Model::File::Visual" }
 
+sub summary {
+	my $self = shift;
+	$self->{_summar} ||=
+	sprintf "%d test cases: %d ok, %d failed, %d todo,"
+			."%d skipped and %d unexpectedly succeeded",
+			map { my $m = "total_$_"; $self->$m }
+			qw/seen passed failed todo skipped unexpectedly_succeeded/;
+}
+
 __PACKAGE__
 
 __END__
@@ -38,6 +47,10 @@ It inherits from L<Test::TAP::Model::Colorful>. That's about it.
 This is actually the only functionality. This method is overridden to return
 L<Test::TAP::Model::File::Visual>. See L<Test::TAP::Model/file_class> for
 details.
+
+=item summary
+
+A nice little textual summary about the result of the entire test run.
 
 =back
 

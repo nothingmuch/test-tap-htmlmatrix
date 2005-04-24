@@ -23,7 +23,11 @@ sub css_class {
 
 sub popup {
 	my $self = shift;
-	join("\n", $self->line, $self->diag);
+	my $text = join("\n", $self->line, $self->diag);
+
+	{ chomp $text and redo };
+
+	$text;
 }
 
 sub link {
