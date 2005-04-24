@@ -29,7 +29,7 @@
 					<table petal:repeat="case_row test/case_rows" width="100%">
 						<tr>
 							<td petal:repeat="case case_row/cases" petal:attr="class case/css_class">
-								<a petal:attr="href case/link; title case/popup">&nbsp;</a>
+								<a petal:attr="href case/link; title case/popup" petal:content="structure string:&amp;nbsp\;" />
 							</td>
 						</tr>
 					</table>

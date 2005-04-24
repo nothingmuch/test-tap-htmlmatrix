@@ -29,6 +29,7 @@ sub new {
 		input => "XHTML",
 		output => "XHTML",
 
+		encode_charset => "utf8",
 		decode_charset => "utf8",
 	);
 
