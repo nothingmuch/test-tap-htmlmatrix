@@ -107,7 +107,7 @@ sub has_inline_css {
 	$self->{has_inline_css};
 }
 
-sub css_html {                # inline html version of css
+sub _slurp_css {
 	my $self = shift;
 	local $/;
 	open my $fh, $self->css_file or die "open: " . $self->css_file. ": $!";
@@ -116,7 +116,7 @@ sub css_html {                # inline html version of css
 
 sub inline_css {
 	my $self = shift;
-	"\t<--\n" . $self->css_html . "\t-->\n\t";
+	"\n<!--\n" . $self->_slurp_css . "-->/\n";
 }
 
 __PACKAGE__
@@ -199,6 +199,16 @@ like you'd expect.
 This is a L<URI::file> object based on C<css_file>. Nothing fancy.
 
 You probably want to override this to something more specific to your env.
+
+=item has_inline_css ?$new_value
+
+This accessor controls whether inline CSS will be generated instead of C<<
+<link> >> style stylesheet refs.
+
+=item inline_css
+
+Returns the contents of C<css_file> fudged slightly to work inside C<< <style>
+>> tags.
 
 =back
 

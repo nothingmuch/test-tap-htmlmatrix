@@ -4,7 +4,8 @@
 	<head>
 		<title petal:content="page/title">TAP Matrix</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel='stylesheet' petal:attr="href page/css_uri" type='text/css'/>
+		<link petal:omit-tag="page/has_inline_css" rel="stylesheet" petal:attr="href page/css_uri" type="text/css" />
+		<style petal:cond="page/has_inline_css" petal:content="structure page/inline_css" type="text/css" />
 	</head>
 	<body>
 
