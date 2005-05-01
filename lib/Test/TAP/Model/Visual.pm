@@ -13,7 +13,7 @@ sub file_class { "Test::TAP::Model::File::Visual" }
 sub summary {
 	my $self = shift;
 	$self->{_summar} ||=
-	sprintf "%d test cases: %d ok, %d failed, %d todo,"
+	sprintf "%d test cases: %d ok, %d failed, %d todo, "
 			."%d skipped and %d unexpectedly succeeded",
 			map { my $m = "total_$_"; $self->$m }
 			qw/seen passed failed todo skipped unexpectedly_succeeded/;
