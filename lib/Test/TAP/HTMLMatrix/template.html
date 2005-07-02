@@ -46,66 +46,37 @@ DOM.Display.prototype = {
 
     registerElement: function (id) {
         this.register[id] = 1;
-	},
-
-	toggleHidden: function () {
-		for (var i in this.register) {
-			var elem = document.getElementById(i);
-			if (elem.style.display == "none") {
-				elem.style.display = "table-row-group";
-			} else {
-				elem.style.display = "none";
-			}
-		}
 	}
 };
 
 var toggles;
 
-function initShow () {
-	var matrix = document.getElementById('matrix');
-	var bodies = matrix.childNodes;
+function initToggle (id) {
+	if (!toggles) {
+		toggles = new Array;
+	}
 
-	toggles = new Array;
-
-	var offset = 0;
-	
-	for(var i = 0; i < bodies.length; i++){
-		var body = bodies[i]; // thead and tfoot
-		if (body.nodeType == 1 && body.id){
-			var elm_cls = body.className;
-			var elm_id = body.id;
-
-			var split_id = elm_id.split('_');
-
-			var idx = i - offset;
-			
-			if (split_id[0] == 'expanded') {
-				var toggle = new DOM.Display();
-				toggles[idx] = toggle;
-				toggle.hideElement(elm_id);
-				toggle.showOnlyElement('collapsed_' + split_id[1]);
-
-				if (elm_cls == 'diff'){
-					toggleDisp(idx);
-				}
-			} else {
-				offset++;
-			}
-		} else {
-			offset++;
-		}
+	if (!toggles[id]) {
+		var toggle = toggles[id] = new DOM.Display()
+		toggle.registerElement('collapsed_' + id);
+		toggle.registerElement('expanded_' + id);
 	}
 }
 
-function toggleDisp (elem) {
-	toggles[elem].toggleHidden();
+function collapse (id) {
+	initToggle(id);
+	toggles[id].showOnlyElement('collapsed_' + id)
+}
+
+function expand (id) {
+	initToggle(id);
+	toggles[id].showOnlyElement('expanded_' + id)
 }
 
 // -->
 		</script>
 	</head>
-	<body onLoad="initShow()">
+	<body>
 
 		<pre petal:condition="page/extra" petal:content="page/extra" />
 		
@@ -128,9 +99,9 @@ function toggleDisp (elem) {
 				</tr>
 			</tfoot>
 			<div petal:omit-tag="string:1" petal:repeat="ctest page/tests">
-				<tbody petal:condition="or: true:ctest/consistent true:page/has_javascript" petal:attr="class if: ctest/consistent then: string:collapsed normal else: string:collapsed diff; id string:collapsed_$repeat/index">
+				<tbody petal:condition="or: true:ctest/consistent true:page/has_javascript" petal:attr="class if: ctest/consistent then: string:collapsed_normal else: string:collapsed_diff; id string:collapsed_$repeat/index">
 					<tr petal:define="test ctest/first_file">
-						<td petal:condition="true:page/has_javascript"><a petal:condition="true:ctest/multiple_files" class="min" petal:attr="href string:javascript:toggleDisp(${repeat/index})">[+]</a></td>
+						<td petal:condition="true:page/has_javascript"><a petal:condition="true:ctest/multiple_files" class="min" petal:attr="href string:javascript:expand(${repeat/index})">[+]</a></td>
 						<td><a petal:attr="href test/link" petal:content="test/name">foo</a></td>
 						<td class="ok" petal:content="test/str_status">OK</td>
 						<td>
@@ -145,9 +116,9 @@ function toggleDisp (elem) {
 						<td class="x sum" petal:attr="style ctest/first_file/color_css" petal:content="ctest/percentage">100%</td> <!-- FIXME -->
 					</tr>
 				</tbody>
-				<tbody petal:condition="and: true:ctest/multiple_files or: true:page/has_javascript false:ctest/consistent" petal:attr="class if: ctest/consistent then: string:expanded normal else: string:expanded diff; ; id string:expanded_$repeat/index">
+				<tbody petal:condition="or: false:ctest/consistent and: true:page/has_javascript true:ctest/multiple_files" petal:attr="class if: ctest/consistent then: string:expanded_normal else: string:expanded_diff; ; id string:expanded_$repeat/index">
 					<tr petal:define="test ctest/first_file">
-						<td petal:condition="true:page/has_javascript" petal:attr="rowspan ctest/subfile_count_plus_one"><a class="min" petal:attr="href string:javascript:toggleDisp(${repeat/index})">[-]</a></td>
+						<td petal:condition="true:page/has_javascript" petal:attr="rowspan ctest/subfile_count_plus_one"><a class="min" petal:attr="href string:javascript:collapse(${repeat/index})">[-]</a></td>
 						<td><a petal:attr="href test/link" petal:content="test/name">foo</a></td>
 						<td />
 						<td>... expanded view:</td>

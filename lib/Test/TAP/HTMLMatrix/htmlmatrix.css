@@ -68,4 +68,9 @@ th, tfoot td {
 .min { font-size: 70%; vertical-align: center; color: #333 }
 
 tbody, tr { border: none }
-.diff { background-color: #888; border: 1px solid #444444 }
+
+.collapsed_diff, .expanded_diff { background-color: #888; border: 1px solid #444444 }
+
+.expanded_normal, .collapsed_diff { display: none }
+.collapsed_normal, .expanded_diff { display: table-row-group }
+
