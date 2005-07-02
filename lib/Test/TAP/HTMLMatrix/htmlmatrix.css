@@ -67,4 +67,5 @@ th, tfoot td {
 
 .min { font-size: 70%; vertical-align: center; color: #333 }
 
-.diff { background-color: #888; }
+tbody, tr { border: none }
+.diff { background-color: #888; border: 1px solid #444444 }

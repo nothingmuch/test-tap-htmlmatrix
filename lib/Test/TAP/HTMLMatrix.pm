@@ -257,6 +257,10 @@ Autrijs Tang <autrijus@autrjius.org> AUTRIJUS
 
 =item *
 
+Casey West <casey@geeknest.com> CWEST
+
+=item *
+
 Gaal Yahas <gaal@forum2.org> GAAL
 
 =back
