@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package Test::TAP::HTMLMatrix;
-use fields qw/model extra petal has_inline_css/;
+use fields qw/model extra petal has_inline_css no_javascript/;
 
 use strict;
 use warnings;
@@ -113,6 +113,17 @@ sub has_inline_css {
 	my $self = shift;
 	$self->{has_inline_css} = shift if @_;
 	$self->{has_inline_css};
+}
+
+sub no_javascript {
+	my $self = shift;
+	$self->{no_javascript} = shift if @_;
+	$self->{no_javascript};
+}
+
+sub has_javascript {
+	my $self = shift;
+	!$self->no_javascript;
 }
 
 sub _slurp_css {

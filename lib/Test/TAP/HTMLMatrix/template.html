@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link petal:omit-tag="page/has_inline_css" rel="stylesheet" petal:attr="href page/css_uri" type="text/css" />
 		<style petal:condition="true:page/has_inline_css" petal:content="structure page/inline_css" type="text/css" />
-		<script>
+		<script petal:condition="true:page/has_javascript">
 <!--
 
 var DOM = {};
@@ -112,14 +112,14 @@ function toggleDisp (elem) {
 		<table id="matrix" petal:attr="summary page/model/summary">
 			<thead>
 				<tr>
-					<th class="r" colspan="3">Test file</th>
+					<th class="r" petal:attr="colspan if: true:page/has_javascript then: string:3 else: string:2">Test file</th>
 					<th class="r">Test cases</th>
 					<th class="r">%</th>
 				</tr>
 			</thead>
 			<tfoot>
 				<tr>
-					<td class="r" colspan="2">TOTAL</td>
+					<td class="r" petal:attr="colspan if: true:page/has_javascript then: string:2 else: string:1">TOTAL</td>
 					<td class="r">
 						<span petal:replace="page/model/test_files">f</span> files
 					</td>
@@ -128,9 +128,9 @@ function toggleDisp (elem) {
 				</tr>
 			</tfoot>
 			<div petal:omit-tag="string:1" petal:repeat="ctest page/tests">
-				<tbody petal:attr="class if: ctest/consistent then: string:normal else: string:diff; id string:collapsed_$repeat/index">
+				<tbody petal:condition="or: true:ctest/consistent true:page/has_javascript" petal:attr="class if: ctest/consistent then: string:collapsed normal else: string:collapsed diff; id string:collapsed_$repeat/index">
 					<tr petal:define="test ctest/first_file">
-						<td><a petal:condition="true:ctest/multiple_files" class="min" petal:attr="href string:javascript:toggleDisp(${repeat/index})">[+]</a></td>
+						<td petal:condition="true:page/has_javascript"><a petal:condition="true:ctest/multiple_files" class="min" petal:attr="href string:javascript:toggleDisp(${repeat/index})">[+]</a></td>
 						<td><a petal:attr="href test/link" petal:content="test/name">foo</a></td>
 						<td class="ok" petal:content="test/str_status">OK</td>
 						<td>
@@ -145,9 +145,9 @@ function toggleDisp (elem) {
 						<td class="x sum" petal:attr="style ctest/first_file/color_css" petal:content="ctest/percentage">100%</td> <!-- FIXME -->
 					</tr>
 				</tbody>
-				<tbody petal:condition="true:ctest/multiple_files" petal:attr="class if: ctest/consistent then: string:normal else: string:diff; ; id string:expanded_$repeat/index">
-					<tr>
-						<td petal:attr="rowspan ctest/subfile_count_plus_one"><a class="min" petal:attr="href string:javascript:toggleDisp(${repeat/index})">[-]</a></td>
+				<tbody petal:condition="and: true:ctest/multiple_files or: true:page/has_javascript false:ctest/consistent" petal:attr="class if: ctest/consistent then: string:expanded normal else: string:expanded diff; ; id string:expanded_$repeat/index">
+					<tr petal:define="test ctest/first_file">
+						<td petal:condition="true:page/has_javascript" petal:attr="rowspan ctest/subfile_count_plus_one"><a class="min" petal:attr="href string:javascript:toggleDisp(${repeat/index})">[-]</a></td>
 						<td><a petal:attr="href test/link" petal:content="test/name">foo</a></td>
 						<td />
 						<td>... expanded view:</td>

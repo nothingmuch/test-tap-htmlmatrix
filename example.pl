@@ -15,6 +15,7 @@ open STDOUT, ">", "example.html"; #"|xmllint --noblanks -> example.html" or die 
 my $v = Test::TAP::HTMLMatrix->new(Test::TAP::Model::Consolidated->new($model_ok, $model_failing));
 
 $v->has_inline_css(1);
+#$v->no_javascript(1);
 
 print "$v";
 
