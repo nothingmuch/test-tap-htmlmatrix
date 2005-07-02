@@ -16,7 +16,7 @@ use URI::file;
 
 use overload '""' => "html";
 
-our $VERSION = "0.04";
+our $VERSION = "0.05";
 
 sub new {
 	my $pkg = shift;
