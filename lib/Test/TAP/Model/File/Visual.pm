@@ -11,6 +11,22 @@ use URI::file;
 
 sub subtest_class { "Test::TAP::Model::Subtest::Visual" }
 
+sub cases {
+	my $self = shift;
+	return $self->SUPER::cases(@_) unless wantarray;
+
+	my @ret = $self->SUPER::cases(@_);
+	return @ret if @ret;
+
+	# if there are no tests, return a stub that represents the whole file
+	return $self->subtest_class->new({
+		type => "test",
+		ok => $self->ok,
+		skip => $self->skipped,
+		line => "stub"
+	});
+}
+
 sub str_status {
 	my $self = shift;
 	return "SKIPPED" if $self->skipped;
