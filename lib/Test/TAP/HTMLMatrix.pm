@@ -96,7 +96,7 @@ sub _find_in_my_INC {
 
 sub template_file {
 	my $self = shift;
-	$self->_find_in_my_INC("template.html");
+	$self->_find_in_my_INC("detailed_view.html");
 }
 
 sub css_file {

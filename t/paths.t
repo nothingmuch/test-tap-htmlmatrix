@@ -13,7 +13,7 @@ BEGIN { use_ok($m = "Test::TAP::HTMLMatrix") }
 my $template = $m->template_file;
 
 ok(-e $template, "template file exists");
-like($template, qr/template\.html$/, "name looks OK");
+like($template, qr/detailed_view\.html$/, "name looks OK");
 ok(File::Spec->file_name_is_absolute($template), "abs path");
 
 my $css = $m->css_file;
