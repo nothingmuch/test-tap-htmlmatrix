@@ -5,26 +5,23 @@
 		<title petal:content="page/title">TAP Matrix</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link petal:omit-tag="page/has_inline_css" rel="stylesheet" petal:attr="href page/css_uri" type="text/css" />
-		<style petal:cond="page/has_inline_css" petal:content="structure page/inline_css" type="text/css" />
+		<style petal:condition="true:page/has_inline_css" petal:content="structure page/inline_css" type="text/css" />
 	</head>
 	<body>
 
 		<pre petal:condition="page/extra" petal:content="page/extra" />
 		
 		<table id="matrix" petal:attr="summary page/model/summary">
-			<colgroup span="2" />
-			<colgroup span="1" />
-			<colgroup span="1" />
 			<thead>
 				<tr>
-					<th class="r" colspan="2">Test file</th>
+					<th class="r" colspan="3">Test file</th>
 					<th class="r">Test cases</th>
 					<th class="r">%</th>
 				</tr>
 			</thead>
 			<tfoot>
 				<tr>
-					<td class="r">TOTAL</td>
+					<td class="r" colspan="2">TOTAL</td>
 					<td class="r">
 						<span petal:replace="page/model/test_files">f</span> files
 					</td>
@@ -32,20 +29,46 @@
 					<td class="x sum" petal:attr="style page/model/color_css" petal:content="page/model/total_percentage">100%</td>
 				</tr>
 			</tfoot>
-			<tr petal:repeat="test page/tests">
-				<td><a petal:attr="href test/link" petal:content="test/name">foo</a></td>
-				<td class="ok" petal:content="test/str_status">OK</td>
-				<td>
-					<table petal:repeat="case_row test/case_rows" width="100%" summary="individual subtests">
-						<tr>
-							<td petal:repeat="case case_row/cases" petal:attr="class case/css_class">
-								<a petal:attr="href case/link; title case/popup" petal:content="structure string:&amp;#160\;" />
-							</td>
-						</tr>
-					</table>
-				</td>
-				<td class="x sum" petal:attr="style test/color_css" petal:content="test/percentage">100%</td>
-			</tr>
+			<div petal:omit-tag="string:1" petal:repeat="ctest page/tests">
+				<tr petal:define="test ctest/first_file" petal:attr="class if: ctest/consistent then: string:collapsed normal else: string:collapsed diff">
+					<td><a petal:condition="true:ctest/multiple_files" class="min" href="javascript:toggleMin()">[+]</a></td>
+					<td><a petal:attr="href test/link" petal:content="test/name">foo</a></td>
+					<td class="ok" petal:content="test/str_status">OK</td>
+					<td>
+						<table petal:repeat="case_row test/case_rows" width="100%" summary="subtests">
+							<tr>
+								<td petal:repeat="case case_row/cases" petal:attr="class case/css_class">
+									<a petal:attr="href case/link; title case/popup" petal:content="structure string:&amp;#160\;" />
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td class="x sum" petal:attr="style test/color_css" petal:content="test/percentage">100%</td>
+				</tr>
+				<div petal:condition="true:ctest/multiple_files" petal:omit-tag="string:1">
+				<tr class="expanded" petal:attr="class if: ctest/consistent then: string:normal else: string:diff">
+					<td petal:attr="rowspan ctest/subfile_count_plus_one"><a class="min" href="javascript:toggleMin()">[-]</a></td>
+					<td><a petal:attr="href test/link" petal:content="test/name">foo</a></td>
+					<td>... expanded view:</td>
+					<td />
+					<td class="x sum" petal:attr="style ctest/first_file/color_css" petal:content="ctest/percentage">100%</td> <!-- FIXME -->
+				</tr>
+				<tr petal:repeat="test ctest/subfiles_ref" petal:attr="class if: ctest/consistent then: string:normal else: string:diff">
+					<td>some_text</td>
+					<td class="ok" petal:content="test/str_status">OK</td>
+					<td>
+						<table petal:repeat="case_row test/case_rows" width="100%" summary="subtests">
+							<tr>
+								<td petal:repeat="case case_row/cases" petal:attr="class case/css_class">
+									<a petal:attr="href case/link; title case/popup" petal:content="structure string:&amp;#160\;" />
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td class="x sum" petal:attr="style test/color_css" petal:content="test/percentage">100%</td>
+				</tr>
+				</div>
+			</div>
 		</table>
 		
 	</body>

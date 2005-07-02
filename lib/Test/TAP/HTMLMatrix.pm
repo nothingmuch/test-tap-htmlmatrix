@@ -7,7 +7,9 @@ use strict;
 use warnings;
 
 use Test::TAP::Model::Visual;
+use Test::TAP::Model::Consolidated;
 use Petal;
+use Petal::Utils qw/:logic/;
 use Carp qw/croak/;
 use File::Spec;
 use URI::file;
@@ -49,7 +51,12 @@ sub tests {
 
 sub model {
 	my __PACKAGE__ $self = shift;
-	$self->{model} = shift if @_;
+	if (@_) {
+		$self->{model} = $_[0]->isa("Test::TAP::Model::Consolidated")
+			? shift
+			: Test::TAP::Model::Consolidated->new(@_);
+	}
+
 	$self->{model};
 }
 
