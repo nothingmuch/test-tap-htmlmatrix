@@ -3,18 +3,24 @@
 use strict;
 use warnings;
 
-use Test::More tests => 7;
+use Test::More tests => 10;
 
 use File::Spec;
 
 my $m;
 BEGIN { use_ok($m = "Test::TAP::HTMLMatrix") }
 
-my $template = $m->template_file;
+my $detail = $m->detail_template;
 
-ok(-e $template, "template file exists");
-like($template, qr/detailed_view\.html$/, "name looks OK");
-ok(File::Spec->file_name_is_absolute($template), "abs path");
+ok(-e $detail, "detail file exists");
+like($detail, qr/detailed_view\.html$/, "name looks OK");
+ok(File::Spec->file_name_is_absolute($detail), "abs path");
+
+my $summary = $m->summary_template;
+
+ok(-e $summary, "summary file exists");
+like($summary, qr/summary_view\.html$/, "name looks OK");
+ok(File::Spec->file_name_is_absolute($summary), "abs path");
 
 my $css = $m->css_file;
 

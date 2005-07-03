@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package Test::TAP::HTMLMatrix;
-use fields qw/model extra petal has_inline_css no_javascript/;
+use fields qw/model extra has_inline_css no_javascript/;
 
 use strict;
 use warnings;
@@ -26,18 +26,8 @@ sub new {
 	my __PACKAGE__ $self = $pkg->fields::new;
 
 	my $ext = shift;
-	my $petal = shift || Petal->new(
-		file => File::Spec->abs2rel($self->template_file), # damn petal requires rel path
-		input => "XHTML",
-		output => "XHTML",
-
-		encode_charset => "utf8",
-		decode_charset => "utf8",
-	);
-
 	$self->model($model);
 	$self->extra($ext);
-	$self->petal($petal);
 	
 	$self;
 }
@@ -67,14 +57,44 @@ sub extra {
 }
 
 sub petal {
-	my __PACKAGE__ $self = shift;
-	$self->{petal} = shift if @_;
-	$self->{petal};
+	my $self = shift;
+	my $file = shift;
+
+	Petal->new(
+		file => File::Spec->abs2rel($file), # damn petal requires rel path
+		input => "XHTML",
+		output => "XHTML",
+
+		encode_charset => "utf8",
+		decode_charset => "utf8",
+	);
 }
 
 sub html {
-	my __PACKAGE__ $self = shift;
-	$self->{petal}->process(page => $self);
+	my $self = shift;
+	$self->detail_html;
+}
+
+sub detail_html {
+	my $self = shift;
+	$self->template_to_html($self->detail_template);
+}
+
+sub summary_html {
+	my $self = shift;
+	$self->template_to_html($self->summary_template);
+}
+
+sub template_to_html {
+	my $self = shift;
+	my $path = shift;
+	$self->process_petal($self->petal($path));
+}
+
+sub process_petal {
+	my $self = shift;
+	my $petal = shift;
+	$petal->process(page => $self);
 }
 
 sub _find_in_INC {
@@ -94,9 +114,14 @@ sub _find_in_my_INC {
 	$self->_find_in_INC(File::Spec->catfile(split("::", __PACKAGE__), shift));
 }
 
-sub template_file {
+sub detail_template {
 	my $self = shift;
 	$self->_find_in_my_INC("detailed_view.html");
+}
+
+sub summary_template {
+	my $self = shift;
+	$self->_find_in_my_INC("summary_view.html");
 }
 
 sub css_file {
