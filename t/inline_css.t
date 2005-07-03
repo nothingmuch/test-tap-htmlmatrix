@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 4;
+use Test::More tests => 8;
 
 use Test::TAP::Model::Visual;
 
@@ -24,11 +24,21 @@ TAP
 
 isa_ok(my $t = $m->new($s, "blah"), $m);
 
-$t->has_inline_css(1);
+my $inline_css_re = qr/border-collapse.*font-weight.*a:hover/s;
 
-my $html = $t->detail_html;
+{
+	$t->has_inline_css(1);
+	my $html = $t->detail_html;
+	like($html, qr/<style/, "HTML contains style tag");
+	like($html, $inline_css_re,  "document contains typical CSS string");
+	unlike($html, qr/htmlmatrix\.css/, "it doesn't mention the CSS file");
+}
 
-like($html, qr/<style/, "HTML contains style tag");
-
-like($html, qr/background-color/,  "document contains typical CSS string");
+{
+	$t->has_inline_css(0);
+	my $html = $t->detail_html;
+	like($html, qr/<link.*?rel="stylesheet"/, "non inline css version contains link with rel=stylesheet");
+	unlike($html, $inline_css_re, "... but no inline css");
+	like($html, qr/htmlmatrix\.css/, "it mentions the CSS file");
+}
 
