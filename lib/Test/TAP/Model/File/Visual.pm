@@ -1,15 +1,22 @@
 #!/usr/bin/perl
 
 package Test::TAP::Model::File::Visual;
-use base qw/Test::TAP::Model::File Test::TAP::Model::Colorful/;
+use base qw/Test::TAP::Model::File/;
 
 use strict;
 use warnings;
 
+use Test::TAP::Model::Colorful;
 use Test::TAP::Model::Subtest::Visual;
 use URI::file;
 
 sub subtest_class { "Test::TAP::Model::Subtest::Visual" }
+
+sub desc_string {
+	my $self = shift;
+	$self->{_desc_string} = shift if @_;
+	$self->{_desc_string} ||= "";
+}
 
 sub cases {
 	my $self = shift;
@@ -82,6 +89,10 @@ provides additional methods.
 
 =over 4
 
+=item cases
+
+An overridden version of L<Test::TAP::Model::File/cases> which will return a single stub case if the case list is actually empty.
+
 =item str_status
 
 A string, "OK" or "FAILED"
@@ -103,6 +114,11 @@ The structure returned is:
 
 This method overrides L<Test::TAP::Model::File/subtest_class> to return
 L<Test::TAP::Model::Subtest::Visual>.
+
+=item desc_string ?$new_value
+
+A short descriptive string used to distinguish this file from others in the
+various report views.
 
 =back
 

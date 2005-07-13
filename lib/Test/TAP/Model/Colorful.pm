@@ -5,6 +5,15 @@ package Test::TAP::Model::Colorful;
 use strict;
 use warnings;
 
+use Test::TAP::Model;
+use Test::TAP::Model::File;
+
+# yucky mixin behavior
+BEGIN {
+	push @Test::TAP::Model::ISA, __PACKAGE__;
+	push @Test::TAP::Model::File::ISA, __PACKAGE__;
+}
+
 sub color {
 	my $self = shift;
 

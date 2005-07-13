@@ -205,7 +205,13 @@ template, you can use this. Read the source to see how it's processed.
 
 =item html
 
-Returns an HTML string.
+Deprecated method - aliases to C<detail_html>.
+
+=item detail_html
+
+=item summary_html
+
+Returns an HTML string for the corresponding template.
 
 This is also the method implementing stringification.
 
@@ -227,7 +233,9 @@ A reasonable title for the page:
 
 A sorted array ref, resulting from $self->model->test_files;
 
-=item template_file
+=item detail_template
+
+=item summary_template
 
 =item css_file
 
@@ -249,10 +257,28 @@ You probably want to override this to something more specific to your env.
 This accessor controls whether inline CSS will be generated instead of C<<
 <link> >> style stylesheet refs.
 
+=item has_javascript $?new_value
+
+This accessor controls whether to generate a javascript enhanced or javascript
+free version of the reports.
+
 =item inline_css
 
 Returns the contents of C<css_file> fudged slightly to work inside C<< <style>
 >> tags.
+
+=item template_to_html $path
+
+Processes the said template using C<process_petal>.
+
+=item process_petal $petal
+
+Takes a petal object and processes it.
+
+=item no_javascript
+
+A predicate method used in the templates for checking if no javascript is
+desired. The opposite of C<has_javascript>.
 
 =back
 

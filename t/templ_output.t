@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 26;
+use Test::More tests => 30;
 
 use Test::TAP::Model::Visual;
 
@@ -30,23 +30,28 @@ isa_ok(my $t = $m->new($s, "extra"), $m);
 
 for my $no_js (1, 0) {
 	$t->no_javascript($no_js);
-	my $html = "$t";
+	my $detail_html = $t->detail_html;
 
-	like($html, qr{<html.*/html>}s, "has <html> tags");
+	like($detail_html, qr{<html.*/html>}s, "detail view has <html> tags");
 
-	like($html, qr/ok 1 foo/, "contains subtest 1 line");
-	like($html, qr/not ok 2 bar/, "subtest 2 line");
-	like($html, qr/ok 3 gorch/, "subtest 3 line");
+	like($detail_html, qr/ok 1 foo/, "contains subtest 1 line");
+	like($detail_html, qr/not ok 2 bar/, "subtest 2 line");
+	like($detail_html, qr/ok 3 gorch/, "subtest 3 line");
 
-	like($html, qr/66.6\d%/, "contains percentage");
+	like($detail_html, qr/66\.6\d%/, "contains percentage");
 
-	like($html, qr/BAILED OUT/, "something bailed out in there");
+	like($detail_html, qr/BAILED OUT/, "something bailed out in there");
 
-	like($html, qr/4\s+ok/is, "ok summary");
-	like($html, qr/2\s+failed/is, "contains fail summary");
-	like($html, qr/1\s+skipped/is, "contains skip summary");
-	like($html, qr/2\s+todo/is, "contains skip summary");
-	like($html, qr/1\s+unexpectedly\s+succeeded/is, "contains skip summary");
+	like($detail_html, qr/4\s+ok/is, "ok summary");
+	like($detail_html, qr/2\s+failed/is, "contains fail summary");
+	like($detail_html, qr/1\s+skipped/is, "contains skip summary");
+	like($detail_html, qr/2\s+todo/is, "contains skip summary");
+	like($detail_html, qr/1\s+unexpectedly\s+succeeded/is, "contains skip summary");
 
-	like($html, qr/6/, "the number 6 is mentioned, that was our plan");
+	like($detail_html, qr/6/, "the number 6 is mentioned, that was our plan");
+
+	my $summary_html = $t->summary_html;
+	like($summary_html, qr{<html.*/html>}s, "summary has <html> tags");
+	like($summary_html, qr/66\.6\d%/, "contains percentage");
 }
+

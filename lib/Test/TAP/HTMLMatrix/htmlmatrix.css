@@ -74,3 +74,6 @@ tbody, tr { border: none }
 .expanded_normal, .collapsed_diff { display: none }
 .collapsed_normal, .expanded_diff { display: table-row-group }
 
+.model_desc { font-size: 85%; padding-left: 1.2em }
+
+.misc_text { font-size: 80%; }
