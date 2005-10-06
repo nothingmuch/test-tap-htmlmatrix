@@ -25,12 +25,16 @@ th, tfoot td {
 	font-size: 1em;
 	color: black
    	text-align: center;
-	vertical-algin: middle;
+	vertical-align: center;
 	background-color: #efefef;
 }
 
 .td {
 	padding: 0.2em;
+}
+
+.exp {
+	display: block;
 }
 
 .x {
@@ -40,6 +44,7 @@ th, tfoot td {
 	overflow: hidden;
 	border: 1px solid #444444;
 }
+
 .x a { display: block; text-decoration: none;}
 /* again, div style tooltips: .x a div { display: none; font-weight: bold; color: #336699; font-style: none;}
 .x a:visited div { display: none }
@@ -65,7 +70,17 @@ th, tfoot td {
 .t { background-color: #007f00; color: white; }
 .nottest { background-color: #7f7f7f; color: white ; }
 
-.min { font-size: 70%; vertical-align: center; color: #333 }
+.min {
+	font-size: 70%;
+	vertical-align: top;
+	padding-top: .9em;
+	color: #333;
+}
+
+.min a:hover {
+	text-decoration: none;
+	color: #e33;
+}
 
 tbody, tr { border: none }
 
