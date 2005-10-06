@@ -85,6 +85,24 @@ sub summary_html {
 	$self->template_to_html($self->summary_template);
 }
 
+sub output_dir {
+   my $self = shift;
+   my $dir  = shift || "./";
+   $self->has_inline_css(1);
+   if ( open FILE, ">", $dir . "detail.html" ) {
+      print FILE $self->detail_html;
+      close FILE
+   } else {
+      warn "Failed to open 'detail.html' : $!";
+   }
+   if ( open FILE, ">", $dir . "summary.html" ) {
+      print FILE $self->summary_html;
+      close FILE
+   } else {
+      warn "Failed to open 'detail.html' : $!";
+   }   
+}
+
 sub template_to_html {
 	my $self = shift;
 	my $path = shift;
