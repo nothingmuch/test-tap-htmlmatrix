@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 
 package Test::TAP::HTMLMatrix;
-use fields qw/model extra has_inline_css no_javascript/;
 
 use strict;
 use warnings;
@@ -19,14 +18,15 @@ use overload '""' => "html";
 our $VERSION = "0.05";
 
 sub new {
-	my $pkg = shift;
+	my ( $pkg, @models ) = @_;
 
-	my $model = shift || croak "must supply a model to graph";
+	my $ext = pop @models unless eval { $models[-1]->isa("Test::TAP::Model") };
 
-	my __PACKAGE__ $self = $pkg->fields::new;
+	@models || croak "must supply a model to graph";
 
-	my $ext = shift;
-	$self->model($model);
+	my $self = bless {}, $pkg;
+
+	$self->model(@models);
 	$self->extra($ext);
 	
 	$self;
@@ -40,7 +40,7 @@ sub tests {
 }
 
 sub model {
-	my __PACKAGE__ $self = shift;
+	my $self = shift;
 	if (@_) {
 		$self->{model} = $_[0]->isa("Test::TAP::Model::Consolidated")
 			? shift
@@ -51,7 +51,7 @@ sub model {
 }
 
 sub extra {
-	my __PACKAGE__ $self = shift;
+	my $self = shift;
 	$self->{extra} = shift if @_;
 	$self->{extra};
 }
