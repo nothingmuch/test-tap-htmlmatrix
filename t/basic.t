@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 6;
+use Test::More tests => 5;
 
 
 my $m;
@@ -17,7 +17,6 @@ isa_ok(my $v = $m->new($r), $m);
 can_ok($v, "html");
 
 can_ok($v, "petal");
-isa_ok($v->petal, "Petal");
 
 can_ok($v, "extra");
 
