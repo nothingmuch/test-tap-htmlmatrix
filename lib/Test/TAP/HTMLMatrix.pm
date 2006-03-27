@@ -11,6 +11,7 @@ use Petal;
 use Petal::Utils qw/:logic/;
 use Carp qw/croak/;
 use File::Spec;
+use File::Path;
 use URI::file;
 
 use overload '""' => "html";
@@ -86,21 +87,26 @@ sub summary_html {
 }
 
 sub output_dir {
-   my $self = shift;
-   my $dir  = shift || "./";
-   $self->has_inline_css(1);
-   if ( open FILE, ">", $dir . "detail.html" ) {
-      print FILE $self->detail_html;
-      close FILE
-   } else {
-      warn "Failed to open 'detail.html' : $!";
-   }
-   if ( open FILE, ">", $dir . "summary.html" ) {
-      print FILE $self->summary_html;
-      close FILE
-   } else {
-      warn "Failed to open 'detail.html' : $!";
-   }   
+	my $self = shift;
+	my $dir  = shift || die "You need to specify a directory";
+
+	mkpath $dir or die "can't create directory '$dir': $!" unless -e $dir;
+
+	$self->has_inline_css(0);
+
+	local $self->{_css_uri} = "htmlmatrix.css";
+
+	my %outputs = (
+		"summary.html" => $self->summary_html,
+		"detail.html" => $self->detail_html,
+		"htmlmatrix.css" => $self->_slurp_css,
+	);
+
+	foreach my $file ( keys %outputs ) {
+		open my $fh, ">", File::Spec->catfile( $dir, $file ) or die "can't open '$file' for writing: $!";
+		print $fh $outputs{$file};
+		close $fh or die "can't close '$file'";
+	}
 }
 
 sub template_to_html {
@@ -149,7 +155,7 @@ sub css_file {
 
 sub css_uri {
 	my $self = shift;
-	URI::file->new($self->css_file);
+	$self->{_css_uri} || URI::file->new($self->css_file);
 }
 
 sub has_inline_css {
