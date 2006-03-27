@@ -217,13 +217,11 @@ and produce a pretty html file.
 
 =over 4
 
-=item new ($model, $?extra, $?petal)
+=item new (@models, $?extra)
 
-$model is the L<Test::TAP::Model> object to extract results from, and the
-optional $?extra is a string to put in <pre></pre> at the top.
-
-$petal is an optional templater object. If you are not happy with the default
-template, you can use this. Read the source to see how it's processed.
+@model is at least one L<Test::TAP::Model> object (or exactly one
+L<Test::TAP::Model::Consolidated>) to extract results from, and the optional
+$?extra is a string to put in <pre></pre> at the top.
 
 =item html
 
