@@ -92,14 +92,12 @@ sub output_dir {
 
 	mkpath $dir or die "can't create directory '$dir': $!" unless -e $dir;
 
-	$self->has_inline_css(0);
-
 	local $self->{_css_uri} = "htmlmatrix.css";
 
 	my %outputs = (
 		"summary.html" => $self->summary_html,
 		"detail.html" => $self->detail_html,
-		"htmlmatrix.css" => $self->_slurp_css,
+		( $self->has_inline_css ? () : "htmlmatrix.css" => $self->_slurp_css ),
 	);
 
 	foreach my $file ( keys %outputs ) {
