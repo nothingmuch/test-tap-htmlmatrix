@@ -302,6 +302,12 @@ desired. The opposite of C<has_javascript>.
 
 =back
 
+=head1 VERSION CONTROL
+
+This module is maintained using Darcs. You can get the latest version from
+L<http://nothingmuch.woobling.org/Test-TAP-HTMLMatrix/>, and use C<darcs send>
+to commit changes.
+
 =head1 AUTHORS
 
 This list was generated from svn log testgraph.pl and testgraph.css in the pugs
