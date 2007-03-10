@@ -262,7 +262,7 @@ A sorted array ref, resulting from $self->model->test_files;
 These return the full path to the L<Petal> template and the CSS stylesheet it
 uses.
 
-Note that these are taken from @INC. If you put F<template.html> under
+Note that these are taken from @INC. If you put F<detailed_view.html> under
 C< catfile(qw/Test TAP HTMLMatrix/) > somewhere in your @INC, it should find it
 like you'd expect.
 
