@@ -12,7 +12,7 @@ my $m; BEGIN { use_ok($m = "Test::TAP::HTMLMatrix") };
 my $s = Test::TAP::Model::Visual->new;
 
 my $f = $s->start_file("foo");
-eval { $f->{results} = { $s->analyze("foo", [split /\n/, <<TAP]) } };
+eval { $f->{results} = $s->analyze("foo", [split /\n/, <<TAP]) };
 1..6
 ok 1 foo
 not ok 2 bar

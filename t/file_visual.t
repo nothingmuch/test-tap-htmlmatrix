@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 use Test::More tests => 15;
+use Test::Harness::Results;
 
 my $m;
 
@@ -20,36 +21,35 @@ can_ok($m, "case_rows");
 
 can_ok($m, "str_status");
 
-my $f= $m->new(my $r = {
+my $f = $m->new(my $r = {
 	file => "foo",
 });
 
-$r->{results}{max} = 1;
-$r->{results}{passing} = 1;
-$r->{results}{seen} = 1;
+my $results = Test::Harness::Results->new();
+$r->{results} = $results;
+$results->inc_max();
+$results->set_passing( 1 );
+$results->inc_seen();
 is($f->str_status, "OK", "seen + ok = OK");
 
-$r->{results}{max} = 2;
+$results->inc_max();
 is($f->str_status, "FAILED", "seen != planned = FAILED");
 
-$r->{results}{max} = 1;
-$r->{results}{seen} = 0;
+$r->{results} = $results = Test::Harness::Results->new();
+$results->inc_max();
 is($f->str_status, "FAILED", "no tests + ok = FAILED");
 
-$r->{results}{passing} = 0;
-$r->{results}{seen} = 1;
+$results->inc_seen();
 is($f->str_status, "FAILED", "seen + fail = FAILED");
 
-$r->{results}{passing} = 1;
+$results->set_passing( 1 );
 $r->{events}[0]{type} = "bailout";
 is($f->str_status, "BAILED OUT", "seen + ok + bailout = BAILED OUT");
 
-$r->{results}{passing} = 1;
-$r->{results}{skip_all} = "foo";
+$results->set_skip_all( "foo" );
 $r->{events} = [];
 is($f->str_status, "SKIPPED", "seen + ok + skip_all = SKIPPED");
 
-$r->{results}{seen} = 0;
-$r->{results}{skip_all} = "foo";
+$r->{results} = $results = Test::Harness::Results->new();
+$results->set_skip_all( "foo" );
 is($f->str_status, "SKIPPED", "no seen + ok + skip_all = SKIPPED");
-

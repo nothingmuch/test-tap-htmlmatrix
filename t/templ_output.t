@@ -16,7 +16,7 @@ BEGIN { use_ok($m = "Test::TAP::HTMLMatrix") }
 my $s = Test::TAP::Model::Visual->new;
 
 my $f = $s->start_file("foo");
-eval { $f->{results} = { $s->analyze("foo", [split /\n/, <<TAP]) } };
+eval { $f->{results} = $s->analyze("foo", [split /\n/, <<TAP]) };
 1..6
 ok 1 foo
 not ok 2 bar
@@ -38,7 +38,7 @@ for my $no_js (1, 0) {
 	like($detail_html, qr/not ok 2 bar/, "subtest 2 line");
 	like($detail_html, qr/ok 3 gorch/, "subtest 3 line");
 
-	like($detail_html, qr/66\.6\d%/, "contains percentage");
+	like($detail_html, qr/66\.67%/, "contains percentage");
 
 	like($detail_html, qr/BAILED OUT/, "something bailed out in there");
 
@@ -52,6 +52,6 @@ for my $no_js (1, 0) {
 
 	my $summary_html = $t->summary_html;
 	like($summary_html, qr{<html.*/html>}s, "summary has <html> tags");
-	like($summary_html, qr/66\.6\d%/, "contains percentage");
+	like($summary_html, qr/66\.67%/, "contains percentage");
 }
 
