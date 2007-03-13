@@ -16,7 +16,7 @@ use URI::file;
 
 use overload '""' => "html";
 
-our $VERSION = "0.06";
+our $VERSION = "0.07";
 
 sub new {
 	my ( $pkg, @models ) = @_;
