@@ -2,16 +2,17 @@
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
+          'PL_FILES' => {},
+          'INSTALLDIRS' => 'site',
           'NAME' => 'Test::TAP::HTMLMatrix',
+          'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/Test/TAP/HTMLMatrix.pm',
           'PREREQ_PM' => {
-                           'Petal'            => '0',
-                           'Petal::Utils'     => '0',
-                           'Test::More'       => '0',
-                           'Test::TAP::Model' => '>= 0.08',
-                           'URI::file'        => '0'
-                         },
-          'INSTALLDIRS' => 'site',
-          'PL_FILES' => {}
+                           'Test::More' => 0,
+                           'URI::file' => 0,
+                           'Petal' => 0,
+                           'Petal::Utils' => 0,
+                           'Test::TAP::Model' => '>= 0.08'
+                         }
         )
 ;
