@@ -23,9 +23,9 @@ th, tfoot td {
 	border: 1px solid #444444;
 	font-weight: bold;
 	font-size: 1em;
-	color: black
+	color: black;
    	text-align: center;
-	vertical-align: center;
+	vertical-align: baseline;
 	background-color: #efefef;
 }
 
